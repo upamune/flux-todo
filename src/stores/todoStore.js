@@ -107,13 +107,24 @@ class TodoStore extends EventEmitter {
                 this.emitChange();
                 break;
             case todoConstants.TOGGLE_COMPLETE_ALL:
+                if (this.areAllComplete()) {
+                    updateAll({ complete : false });
+                } else {
+                    updateAll({ complete : true });
+                }
                 break;
             case todoConstants.DESTROY:
+                destory(action.id);
+                this.emitChange();
                 break;
             case todoConstants.DESTROY_COMPLETE:
+                destoryCompleted();
+                this.emitChange();
                 break;
             case todoConstants.FETCH_TODOS:
             case todoConstants.SYNC_TODOS:
+                _todos = action.todos;
+                this.emitChange();
                 break;
             default:
         }
