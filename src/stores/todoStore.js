@@ -18,7 +18,7 @@ function guid() {
 }
 
 function create(text) {
-    const id = guid()
+    const id = guid();
     _todos[id] = {
         'id' : id,
         complete : false,
@@ -27,7 +27,7 @@ function create(text) {
 }
 
 function update(id, updates) {
-    _todos[id] = assign({}. _todos[id], updates);
+    _todos[id] = assign({}, _todos[id], updates);
 }
 
 function updateAll(updates) {
@@ -36,14 +36,16 @@ function updateAll(updates) {
     }
 }
 
-function destory(id) {
+function destroy(id) {
+    console.log(_todos[id]);
     delete _todos[id];
+    console.log(_todos[id]);
 }
 
-function destoryCompleted() {
+function destroyCompleted() {
     for(let id in _todos) {
-        if (_todos.complete) {
-            destory(id)
+        if (_todos[id].complete) {
+            destroy(id);
         }
     }
 }
@@ -114,11 +116,11 @@ class TodoStore extends EventEmitter {
                 }
                 break;
             case todoConstants.DESTROY:
-                destory(action.id);
+                destroy(action.id);
                 this.emitChange();
                 break;
             case todoConstants.DESTROY_COMPLETE:
-                destoryCompleted();
+                destroyCompleted();
                 this.emitChange();
                 break;
             case todoConstants.FETCH_TODOS:

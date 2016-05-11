@@ -1,5 +1,5 @@
 import React from 'react';
-import cx from 'react/lib/cx';
+import cx from 'classnames';
 import todoActions from '../actions/todoActions';
 import TodoTextInput from './TodoTextInput';
 
